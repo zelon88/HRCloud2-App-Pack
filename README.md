@@ -11,7 +11,7 @@ This pack currently includes...
 
 These files are included with the master HRCloud2 distribution. 
 
-They are provided here for users who wish to download them separately, uninstall or reinstall their Apps, and to demonstrate how HRCloud2 Apps are bundled, distributed, and implemented
+They are provided here for users who wish to download them separately, uninstall or reinstall their Apps, and to demonstrate how HRCloud2 Apps are bundled, distributed, and implemented.
   
   
 # Installation Instructions
@@ -31,3 +31,11 @@ to install.
 MANUAL INSTALLATION
 
 -Extract the .zip files into your HRProprietary/HRCloud2/Applications directory such that there is an Application/Application.php file structure within the "Application" folder.
+
+# More Information
+
+This repository (https://github.com/zelon88/HRCloud2-App-Pack) contains "Apps" for HRCloud2 (https://github.com/zelon88/HRCloud2). 
+
+It is a requirement of the HRCloud2 GNU GPLv3 License to include a link to the official HRCloud2 repository and to provide the software in this repository with it's own copy of the GNU GPLv3 License. 
+
+<3 Open-Source.
