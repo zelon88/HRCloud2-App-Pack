@@ -8,6 +8,8 @@ This pack currently includes...
 
 2. HRC2 Contacts  by zelon88 
 
+3. HRC2 Calculator  by zelon88 
+
 
 These files are included with the master HRCloud2 distribution. 
 
