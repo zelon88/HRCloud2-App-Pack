@@ -4,7 +4,7 @@ An official pack of useful HRC2 Apps for your home server.
 
 This pack currently includes...
 
-1. HRC2 Notes  by zelon88
+1. HRC2 Notes  by [zelon88](https://github.com/zelon88) 
 
 2. HRC2 Contacts  by [zelon88](https://github.com/zelon88) 
 
