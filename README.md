@@ -10,7 +10,7 @@ This pack currently includes...
 
 3. HRC2 Calculator  by [zelon88](https://github.com/zelon88) 
 
-4. NRC2 ServStat by [avignat](https://github.com/avignat)
+4. GRC2 ServStat by [avignat](https://github.com/avignat)
 
 
 These files are included with the master HRCloud2 distribution. 
