@@ -6,9 +6,11 @@ This pack currently includes...
 
 1. HRC2 Notes  by zelon88
 
-2. HRC2 Contacts  by zelon88 
+2. HRC2 Contacts  by [zelon88](https://github.com/zelon88) 
 
-3. HRC2 Calculator  by zelon88 
+3. HRC2 Calculator  by [zelon88](https://github.com/zelon88) 
+
+4. NRC2 ServStat by [avignat](https://github.com/avignat)
 
 
 These files are included with the master HRCloud2 distribution. 
