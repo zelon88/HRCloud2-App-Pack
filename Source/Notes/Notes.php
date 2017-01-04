@@ -47,11 +47,11 @@ $noteTitle = 'New Note...';
 $noteButtonEcho = 'Create Note';
 if (!file_exists($NotesDir)) { 
   $txt = ('OP-Act: Creating user notes directory on '.$Time.'!'); 
-  $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL , FILE_APPEND); 
+  $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL, FILE_APPEND); 
   mkdir($NotesDir); }
 if (!file_exists($NotesDir)) { 
   $txt = ('ERROR!!! HRC2N19, There was a problem creating the user notes directory on '.$Time.'!'); 
-  $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL , FILE_APPEND); 
+  $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL, FILE_APPEND); 
   die ($txt); } 
 
 // / The following code is performed whenever a user selects to edit a Note.
@@ -65,7 +65,7 @@ if (isset($_GET['editNote'])) {
   $noteButtonEcho = 'Edit Note';
   $txt = ('OP-Act: Opening Note '.$noteToDelete.' for editing on '.$Time.'!'); 
   echo 'Editing <i>'.$noteName.'</i>'; 
-  $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL , FILE_APPEND); }
+  $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL, FILE_APPEND); }
 
 // / The following code is performed whenever a user selects to delete a Note.
 if (isset($_GET['deleteNote'])) {
@@ -74,7 +74,7 @@ if (isset($_GET['deleteNote'])) {
   unlink($NotesDir.$noteToDelete.'.txt'); 
   $txt = ('OP-Act: Deleting Note '.$noteToDelete.' on '.$Time.'!');
   echo 'Deleted <i>'.$noteToDelete.'</i>'; 
-  $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL , FILE_APPEND); }
+  $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL, FILE_APPEND); }
 
 // / If the Notes directory exists we check that the API POST variables were set.  
 if (is_dir($NotesDir)) {
@@ -83,13 +83,13 @@ if (is_dir($NotesDir)) {
   	$noteName = str_replace(str_split('[]{};:$!#^&%@>*<'), '', $_POST['newNote']);
     if (!isset($_POST['note'])) {
       $txt = ('ERROR!!! HRC2N26, There was no Note content detected on '.$Time.'!'); 
-      $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL , FILE_APPEND); 
+      $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL, FILE_APPEND); 
       die ($txt); } 
   	$note = str_replace(str_split('[]{};:$!#^&%@>*<'), '', $_POST['note']); 
     $NoteFile = $NotesDir.$noteName.'.txt'; 
     $MAKENoteFile = file_put_contents($NoteFile, $note.PHP_EOL); 
     $txt = ('OP-Act: Note '.$noteName.' created sucessfully on '.$Time.'!'); 
-    $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL , FILE_APPEND); 
+    $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL, FILE_APPEND); 
     echo nl2br('Created <i>'.$noteName.'</i>'); } 
   // / If the input POSTS are NOT set, we present the user with a New Note form.
   	echo nl2br('<form method="post" action="Notes.php" type="multipart/form-data">'."\n");
