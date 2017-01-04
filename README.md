@@ -16,7 +16,7 @@ This pack currently includes...
 
 6. HRC2 Grabber by [zelon88](https://github.com/zelon88)
 
-7. PHP-AV by [FujitsuBoy (aka Keyboard Artist)](https://sourceforge.net/projects/phpantivirus/) & [zelon88](https://github.com/zelon88)
+7. HRC2 PHP-AV by [FujitsuBoy (aka Keyboard Artist)](https://sourceforge.net/projects/phpantivirus/) & [zelon88](https://github.com/zelon88)
 
 
 These files are included with the master HRCloud2 distribution. 
