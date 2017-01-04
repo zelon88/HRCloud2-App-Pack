@@ -12,6 +12,12 @@ This pack currently includes...
 
 4. HRC2 ServStat by [avignat](https://github.com/avignat) (Ported to HRC2 by [zelon88](https://github.com/zelon88))
 
+5. HRC2 ServMonitor by [zelon88](https://github.com/zelon88)
+
+6. HRC2 Grabber by [zelon88](https://github.com/zelon88)
+
+7. PHP-AV by [FujitsuBoy (aka Keyboard Artist)](https://sourceforge.net/projects/phpantivirus/) & [zelon88](https://github.com/zelon88)
+
 
 These files are included with the master HRCloud2 distribution. 
 
