@@ -4,7 +4,7 @@
 /*//
 HRCLOUD2-PLUGIN-START
 App Name: Contacts
-App Version: 1.2 (1-3-2017 21:45)
+App Version: 1.9 (6-24-2017 11:30)
 App License: GPLv3
 App Author: zelon88
 App Description: A simple HRCloud2 App for creating, viewing, and managing contacts!
@@ -49,8 +49,7 @@ else {
 // / The following code ensures the Contacts directory exists and creates it if it does not.
 $SaltHash = hash('ripemd160',$Date.$Salts.$UserIDRAW);
 $ContactsDir = $InstLoc.'/DATA/'.$UserID.'/.AppData/Contacts/';
-$contactsList = scandir($ContactsDir, SCANDIR_SORT_DESCENDING);
-$newest_contact = $contactsList[0];
+$ContactsDir2 = $CloudUsrDir.'/.AppData/Contacts/';
 $contactData = '';
 $contactButtonEcho = 'New Contact';
 $contactTitle = 'New Contact...';
@@ -62,11 +61,15 @@ if (!file_exists($ContactsDir)) {
   $txt = ('ERROR!!! HRC2ContactsApp19, There was a problem creating the user contacts directory on '.$Time.'!'); 
   $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL, FILE_APPEND); 
   die ($txt); } 
+copy($InstLoc.'/index.html', $ContactsDir.'index.html'); 
+$contactsList = scandir($ContactsDir, SCANDIR_SORT_DESCENDING);
+$newest_contact = $contactsList[0];
 
 // / The following code is performed whenever a user selects to edit a Contact.
 if (isset($_GET['editContact']) && $_GET['editContact'] !== '') {
-  $ContactToEdit = str_replace(str_split('[]{};:$!#^&%@>*<'), '', $_GET['editContact']);
+  $ContactToEdit = str_replace(str_split('.//[]{};:$!#^&%@>*<'), '', $_GET['editContact']);
   $ContactToEdit = str_replace(' ', '_', $ContactToEdit);
+  if ($contactToEdit == '') $contactToEdit = 'New Contact-'.$Date;
   $ContactToEdit = $ContactToEdit.'.php';
   $ContactFile = $ContactsDir.$ContactToEdit;
   if (!file_exists($ContactFile)) {
@@ -84,12 +87,12 @@ if (isset($_GET['editContact']) && $_GET['editContact'] !== '') {
 
 // / The following code is performed whenever a user selects to delete a Contact.
 if (isset($_GET['deleteContact'])) {
-  $contactToDelete = str_replace(str_split('[]{};:$!#^&%@>*<'), '', $_GET['deleteContact']);
+  $contactToDelete = str_replace(str_split('./[]{};:$!#^&%@>*<'), '', $_GET['deleteContact']);
   $ContactToDelete = str_replace(' ', '_', $ContactToDelete);
   if (file_exists($ContactsDir.$contactToDelete.'.php')) {
     @unlink($ContactsDir.$contactToDelete.'.php'); }
-  if (file_exists($ContactsDir.$contactToDelete)) {
-    @unlink($ContactsDir.$contactToDelete); } 
+  if (file_exists($ContactsDir2.$contactToDelete)) {
+    @unlink($ContactsDir2.$contactToDelete); } 
   $txt = ('OP-Act: Deleting Contacts '.$contactToDelete.' on '.$Time.'!');
   echo 'Deleted <i>'.$contactToDelete.'</i>'; 
   $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL, FILE_APPEND); }
@@ -97,7 +100,9 @@ if (isset($_GET['deleteContact'])) {
 // / If the input POSTS are set, we turn them into a contact.
 if (isset($_POST['newContact'])) {
   $_POST['newContact'] = str_replace(' ', '_', $_POST['newContact']);
-  $contactName = str_replace(str_split('[]{};:$!#^&%>*<'), '', $_POST['newContact']);
+  $contactName = str_replace(str_split('./[]{};:$!#^&%>*<'), '', $_POST['newContact']);
+  if ($contactName == '' or $_POST['newContact'] == '') { 
+    $contactName = 'New Contact-'.$Date; }
   $ContactFile = $ContactsDir.$contactName.'.php'; 
   $ContactSyntaxStart = file_put_contents($ContactFile, '<?php'.PHP_EOL, FILE_APPEND);
   $contact = file_put_contents($ContactFile, '$contact = \''.str_replace(str_split('[]{};:$!#^&%>*<'), '', $_POST['newContact']).'\';'.PHP_EOL, FILE_APPEND); 
@@ -114,9 +119,9 @@ if (isset($_POST['newContact'])) {
   $ContactPhone4 = file_put_contents($ContactFile, '$ContactPhone4 = \''.str_replace(str_split('[]{};:$!#^&%@>*<'), '', $_POST['editContactPhone4']).'\';'.PHP_EOL, FILE_APPEND);
   $ContactPhone5 = file_put_contents($ContactFile, '$ContactPhone5 = \''.str_replace(str_split('[]{};:$!#^&%@>*<'), '', $_POST['editContactPhone5']).'\';'.PHP_EOL, FILE_APPEND);
   $ContactPhone6 = file_put_contents($ContactFile, '$ContactPhone6 = \''.str_replace(str_split('[]{};:$!#^&%@>*<'), '', $_POST['editContactPhone6']).'\';'.PHP_EOL, FILE_APPEND);
-  $ContactWebsite1 = file_put_contents($ContactFile, '$ContactWebsite1 = \''.str_replace(str_split('[]{};:$!#^&%@>*<'), '', $_POST['editContactWebsite1']).'\';'.PHP_EOL, FILE_APPEND);
-  $ContactWebsite2 = file_put_contents($ContactFile, '$ContactWebsite2 = \''.str_replace(str_split('[]{};:$!#^&%@>*<'), '', $_POST['editContactWebsite2']).'\';'.PHP_EOL, FILE_APPEND);
-  $ContactWebsite3 = file_put_contents($ContactFile, '$ContactWebsite3 = \''.str_replace(str_split('[]{};:$!#^&%@>*<'), '', $_POST['editContactWebsite3']).'\';'.PHP_EOL, FILE_APPEND);
+  $ContactWebsite1 = file_put_contents($ContactFile, '$ContactWebsite1 = \''.str_replace(str_split('[]{};$!#^&%@>*<'), '', $_POST['editContactWebsite1']).'\';'.PHP_EOL, FILE_APPEND);
+  $ContactWebsite2 = file_put_contents($ContactFile, '$ContactWebsite2 = \''.str_replace(str_split('[]{};$!#^&%@>*<'), '', $_POST['editContactWebsite2']).'\';'.PHP_EOL, FILE_APPEND);
+  $ContactWebsite3 = file_put_contents($ContactFile, '$ContactWebsite3 = \''.str_replace(str_split('[]{};$!#^&%@>*<'), '', $_POST['editContactWebsite3']).'\';'.PHP_EOL, FILE_APPEND);
   $ContactFB = file_put_contents($ContactFile, '$ContactFB = \''.str_replace(str_split('[]{};:$!#^&%@>*<'), '', $_POST['editContactFB']).'\';'.PHP_EOL, FILE_APPEND);
   $ContactTwitter = file_put_contents($ContactFile, '$ContactTwitter = \''.str_replace(str_split('[]{};:$!#^&%>*<'), '', $_POST['editContactTwitter']).'\';'.PHP_EOL, FILE_APPEND);
   $ContactSnap = file_put_contents($ContactFile, '$ContactSnap = \''.str_replace(str_split('[]{};:$!#^&%>*<'), '', $_POST['editContactSnap']).'\';'.PHP_EOL, FILE_APPEND);
@@ -154,8 +159,8 @@ if (!isset($_POST['newContact']) && !isset($_GET['editContact'])) {
   $ContactsNotes = '';  }
 
 
-echo('<div id="showDetailsButton1" name="showDetailsButton" style="display:block;"><button class="button" onclick="toggle_visibility(\'contactInfo\'); toggle_visibility(\'showDetailsButton1\'); toggle_visibility(\'showDetailsButton2\');">Show Details</button></div>');
-echo('<div id="showDetailsButton2" name="showDetailsButton" style="display:none;"><button class="button" onclick="toggle_visibility(\'contactInfo\'); toggle_visibility(\'showDetailsButton1\'); toggle_visibility(\'showDetailsButton2\');">Hide Details</button></div>');
+echo('<div id="showDetailsButton1" name="showDetailsButton" style="display:block;"><input type="submit" value="Show Details" class="button" onclick="toggle_visibility(\'contactInfo\'); toggle_visibility(\'showDetailsButton1\'); toggle_visibility(\'showDetailsButton2\');"></div>');
+echo('<div id="showDetailsButton2" name="showDetailsButton" style="display:none;"><input type="submit" value="Hide Details" class="button" onclick="toggle_visibility(\'contactInfo\'); toggle_visibility(\'showDetailsButton1\'); toggle_visibility(\'showDetailsButton2\');"></div>');
 
 // / The following code presents the user with a fresh Contact form after all other operations 
 
@@ -240,8 +245,8 @@ echo nl2br('</div></form>');
 $contactsList2 = scandir($ContactsDir); 
 $contactCounter = 0;
 foreach ($contactsList2 as $contact) {
-  if ($contact == '.' or $contact == '..' or strpos($contact, '.php') == 'false' 
-    or $contact == '' or $contact == '.php') continue; 
+  if ($contact == '.' or $contact == '..' or strpos($contact, '.php') == 'false' or $contact == 'index.html' 
+    or strpos($contact, '.html') == 'true' or $contact == '' or $contact == '.php') continue; 
   $contactCounter++;
   $contactFile = $ContactsDir.$contact; 
   $contactEcho = str_replace('.php', '', $contact);
