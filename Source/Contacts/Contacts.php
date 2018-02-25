@@ -4,7 +4,7 @@
 /*//
 HRCLOUD2-PLUGIN-START
 App Name: Contacts
-App Version: 1.9 (6-24-2017 11:30)
+App Version: 2.3 (7-30-2017 21:00)
 App License: GPLv3
 App Author: zelon88
 App Description: A simple HRCloud2 App for creating, viewing, and managing contacts!
@@ -69,7 +69,7 @@ $newest_contact = $contactsList[0];
 if (isset($_GET['editContact']) && $_GET['editContact'] !== '') {
   $ContactToEdit = str_replace(str_split('.//[]{};:$!#^&%@>*<'), '', $_GET['editContact']);
   $ContactToEdit = str_replace(' ', '_', $ContactToEdit);
-  if ($contactToEdit == '') $contactToEdit = 'New Contact-'.$Date;
+  if ($ContactToEdit == '') $ContactToEdit = 'New Contact-'.$Date;
   $ContactToEdit = $ContactToEdit.'.php';
   $ContactFile = $ContactsDir.$ContactToEdit;
   if (!file_exists($ContactFile)) {
@@ -77,11 +77,11 @@ if (isset($_GET['editContact']) && $_GET['editContact'] !== '') {
     $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL, FILE_APPEND); 
     die('No contact to show.'); }
   require ($ContactFile);
-  $ContactData = file_get_contents($ContactsDir.$contactToEdit);
-  $ContactData = str_replace('<br />', '', $contactData);
+  $ContactData = file_get_contents($ContactsDir.$ContactToEdit);
+  $ContactData = str_replace('<br />', '', $ContactData);
   $ContactTitle = str_replace('.php', '', $ContactToEdit);
   $contactButtonEcho = 'Edit Contact';
-  $txt = ('OP-Act: Opening Contact '.$contactToEdit.' for editing on '.$Time.'!'); 
+  $txt = ('OP-Act: Opening Contact '.$ContactToEdit.' for editing on '.$Time.'!'); 
   echo 'Editing <i>'.$ContactTitle.'</i>'; 
   $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL, FILE_APPEND); }
 
@@ -89,10 +89,18 @@ if (isset($_GET['editContact']) && $_GET['editContact'] !== '') {
 if (isset($_GET['deleteContact'])) {
   $contactToDelete = str_replace(str_split('./[]{};:$!#^&%@>*<'), '', $_GET['deleteContact']);
   $ContactToDelete = str_replace(' ', '_', $ContactToDelete);
-  if (file_exists($ContactsDir.$contactToDelete.'.php')) {
-    @unlink($ContactsDir.$contactToDelete.'.php'); }
-  if (file_exists($ContactsDir2.$contactToDelete)) {
-    @unlink($ContactsDir2.$contactToDelete); } 
+  $counter = 0;
+  while (file_exists($ContactsDir.$contactToDelete.'.php')) {
+    if ($counter >= 10) continue;
+    @unlink($ContactsDir.$contactToDelete.'.php'); 
+    $counter++; }
+  while (file_exists($ContactsDir2.$contactToDelete.'.php')) {
+    if ($counter >= 10) continue;
+    @unlink($ContactsDir2.$contactToDelete.'.php'); 
+    $counter++; }
+  if (file_exists($ContactsDir.$contactToDelete.'.txt') or file_exists($ContactsDir2.$contactToDelete.'.txt')){
+    $txt = ('ERROR!!! HRC2C102, There was a problem deleting the selected user contact on '.$Time.'!'); 
+    $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL , FILE_APPEND); }
   $txt = ('OP-Act: Deleting Contacts '.$contactToDelete.' on '.$Time.'!');
   echo 'Deleted <i>'.$contactToDelete.'</i>'; 
   $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL, FILE_APPEND); }
