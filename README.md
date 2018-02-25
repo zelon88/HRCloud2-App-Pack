@@ -22,7 +22,7 @@ This pack currently includes...
 
 9. Pell by [jaredreich](https://github.com/jaredreich) & [zelon88](https://zelon88)
 
-10. UberGallery by [UberGallery](htps://ubergallery.com) & [zelon88](https://github.com/zelon88)
+10. UberGallery by [UberGallery](https://ubergallery.com) & [zelon88](https://github.com/zelon88)
 
 
 These files are included with the master HRCloud2 distribution. 
