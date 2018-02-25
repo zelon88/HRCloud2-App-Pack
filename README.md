@@ -18,6 +18,12 @@ This pack currently includes...
 
 7. HRC2 PHP-AV by [FujitsuBoy (aka Keyboard Artist)](https://sourceforge.net/projects/phpantivirus/) & [zelon88](https://github.com/zelon88)
 
+8. Calendar by [bastianallgeier](https://github.com/bastianallgeier)
+
+9. Pell by [jaredreich](https://github.com/jaredreich) & [zelon88](https://zelon88)
+
+10. UberGallery by [UberGallery](htps://ubergallery.com) & [zelon88](https://github.com/zelon88)
+
 
 These files are included with the master HRCloud2 distribution. 
 
