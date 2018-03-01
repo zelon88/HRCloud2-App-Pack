@@ -52,6 +52,6 @@ MANUAL INSTALLATION
 
 This repository (https://github.com/zelon88/HRCloud2-App-Pack) contains "Apps" for HRCloud2 (https://github.com/zelon88/HRCloud2). 
 
-Please include a link to the official HRCloud2 repository and to provide the software in this repository with it's own copy of the GNU GPLv3 License. 
+If you distribute this repository or your own HRCloud2 Apps please include a link to the official HRCloud2 repository. 
 
 <3 Open-Source.
