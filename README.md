@@ -24,6 +24,11 @@ This pack currently includes...
 
 10. UberGallery by [UberGallery](https://ubergallery.com) & [zelon88](https://github.com/zelon88)
 
+11. OpenJSCAD by [OpenJSCAD.org](https://openjscad.org)
+
+12. RSS by [zelon88](https://github.com/zelon88)
+
+13. JSPaint by [1j01](https://github.com/1j01/jspaint)
 
 These files are included with the master HRCloud2 distribution. 
 
