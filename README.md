@@ -12,23 +12,30 @@ This pack currently includes...
 
 4. HRC2 ServStat by [avignat](https://github.com/avignat) & [zelon88](https://github.com/zelon88)
 
-5. HRC2 ServMonitor by [zelon88](https://github.com/zelon88)
+5. HRC2 ServMonitor by [zelon88](https://github.com/zelon88), special credit to [Itzik Gur](https://iconarchive.com/artist/itzikgur.html) & [jqWidgets](https://www.jqwidgets.com/) 
 
 6. HRC2 Grabber by [zelon88](https://github.com/zelon88)
 
 7. HRC2 PHP-AV by [FujitsuBoy (aka Keyboard Artist)](https://sourceforge.net/projects/phpantivirus/) & [zelon88](https://github.com/zelon88)
 
-8. Calendar by [bastianallgeier](https://github.com/bastianallgeier)
+8. HRC2 Bookmarks by [zelon88](https://github.com/zelon88)
 
-9. Pell by [jaredreich](https://github.com/jaredreich) & [zelon88](https://zelon88)
+9. HRC2 Executor by [zelon88](https://github.com/zelon88)
 
-10. UberGallery by [UberGallery](https://ubergallery.com) & [zelon88](https://github.com/zelon88)
+10. HRC2 SmartLightbulb by [urish](https://github.com/urish), [Sagi363](https://github.com/Sagi363), [TalAter](https://github.com/TalAter), [zelon88](https://github.com/zelon88)
 
-11. OpenJSCAD by [OpenJSCAD.org](https://openjscad.org)
+10. Calendar by [bastianallgeier](https://github.com/bastianallgeier)
 
-12. RSS by [zelon88](https://github.com/zelon88)
+11. Pell by [jaredreich](https://github.com/jaredreich) & [zelon88](https://zelon88)
 
-13. JSPaint by [1j01](https://github.com/1j01/jspaint)
+12. UberGallery by [UberGallery](https://ubergallery.com) & [zelon88](https://github.com/zelon88)
+
+13. OpenJSCAD by [OpenJSCAD.org](https://openjscad.org)
+
+14. RSS by [zelon88](https://github.com/zelon88)
+
+15. JSPaint by [1j01](https://github.com/1j01/jspaint)
+
 
 These files are included with the master HRCloud2 distribution. 
 
