@@ -6,11 +6,12 @@
 /*//
 HRCLOUD2-PLUGIN-START
 App Name: ServMonitor
-App Version: v2.9 (7-19-2017 8:30)
+App Version: v3.3 (4-8-2021 00:00)
 App License: GPLv3
 App Author: zelon88 (w/special credits)
 App Description: A simple HRCloud2 App for monitoring server status.
 App Integration: 0 (False)
+App Permission: 0 (Admin)
 HRCLOUD2-PLUGIN-END
 //*/
 
@@ -21,13 +22,12 @@ HRCLOUD2-PLUGIN-END
   // / 4. StackExchange user "dhaupin" (http://stackoverflow.com/users/2418655/dhaupin), (http://stackoverflow.com/questions/4705759/how-to-get-cpu-usage-and-ram-usage-without-exec/29669238)
   // / 5. Also check out the ICON_CREDITS.txt for more props to amazing designers and developers!!!
 
+$noStyles = 1;
+
 // / -----------------------------------------------------------------------------------
 // / The follwoing code checks if the commonCore.php file exists and terminates if it does not.
-if (!file_exists('/var/www/html/HRProprietary/HRCloud2/commonCore.php')) {
-  echo nl2br('</head><body>ERROR!!! HRC2ServMonitorApp18, Cannot process the HRCloud2 Common Core file (commonCore.php)!'."\n".'</body></html>'); 
-  die (); }
-else {
-  include ('/var/www/html/HRProprietary/HRCloud2/commonCore.php'); }
+if (!file_exists('../../commonCore.php')) die ('</head><body>ERROR!!! HRC2ServMonitorApp18, Cannot process the HRCloud2 Common Core file (commonCore.php)!'.PHP_EOL.'</body></html>'); 
+else include ('../../commonCore.php'); 
 // / -----------------------------------------------------------------------------------
 
 // / -----------------------------------------------------------------------------------
@@ -45,21 +45,21 @@ if ($UpdateInterval <= 2000) {
   $txt = ('WARNING!!! HRC2ServMonitorApp32, The "Update Interval" must be greater than 2000ms on '.$Time.'! Please increase the "Update Interval" to a value greater than 2000ms (or 2s).'); 
   $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL, FILE_APPEND);
   $UpdateInterval = 2000; }
-if ($UpateInt == '' or !(isset($UpdateInterval))) {
+if (!isset($UpateInt) or !(isset($UpdateInterval))) {
   $UpateInt = 5000; }
 // / -----------------------------------------------------------------------------------
 
 // / -----------------------------------------------------------------------------------
 // / The following code creates a cache dir, or returns an error if one cannot be created.
 // / -Take ownership of cache files
-@chown('Cache/', 'www-data');
+@chown('Cache/', $ILPerms);
 // / -Change the group of cache files-
-@chgrp('Cache', 'www-data');
+@chgrp('Cache', $ILPerms);
 // / -Restrict cache files-
-@chmod('Cache/', 0755);
+@chmod('Cache/', $ILPerms);
 // / -Check for the existence of required dirs and files. Copy a new index if needed-
 if (!is_dir('Cache/')) {
-  @mkdir('Cache/', 0755); 
+  @mkdir('Cache/', $ILPerms); 
   @copy($InstLoc.'/index.html', 'Cache/index.html'); }
 // / -Report erros-
 if (!is_dir('Cache/')) {
