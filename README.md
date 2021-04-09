@@ -22,21 +22,22 @@ This pack currently includes...
 
 9. HRC2 Executor by [zelon88](https://github.com/zelon88)
 
-10. HRC2 SmartLightbulb by [urish](https://github.com/urish), [Sagi363](https://github.com/Sagi363), [TalAter](https://github.com/TalAter), [zelon88](https://github.com/zelon88)
+10 HRC2 Weather by [lannes]() & [zelon88](https://github.com/zelon88)
 
-11. Calendar by [bastianallgeier](https://github.com/bastianallgeier)
+11 HRC2 SmartLightbulb by [urish](https://github.com/urish), [Sagi363](https://github.com/Sagi363), [TalAter](https://github.com/TalAter), [zelon88](https://github.com/zelon88)
 
-12. Pell by [jaredreich](https://github.com/jaredreich) & [zelon88](https://zelon88)
+12 Calendar by [bastianallgeier](https://github.com/bastianallgeier)
 
-13. UberGallery by [UberGallery](https://ubergallery.com) & [zelon88](https://github.com/zelon88)
+13 Pell by [jaredreich](https://github.com/jaredreich) & [zelon88](https://zelon88)
 
-14. OpenJSCAD by [OpenJSCAD.org](https://openjscad.org)
+14 UberGallery by [UberGallery](https://ubergallery.com) & [zelon88](https://github.com/zelon88)
 
-15. RSS by [zelon88](https://github.com/zelon88)
+15 OpenJSCAD by [OpenJSCAD.org](https://openjscad.org)
 
-16. JSPaint by [1j01](https://github.com/1j01/jspaint)
+16 RSS by [zelon88](https://github.com/zelon88)
 
-17. HRC2 Weather by [lannes]() & [zelon88](https://github.com/zelon88)
+17 JSPaint by [1j01](https://github.com/1j01/jspaint)
+
 
 These files are included with the master HRCloud2 distribution. 
 
