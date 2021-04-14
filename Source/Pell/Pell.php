@@ -2,38 +2,37 @@
 /*//
 HRCLOUD2-PLUGIN-START
 App Name: Pell for HRC2
-App Version: v3.1 (10-3-2017 21:15)
+App Version: v3.5 (4-11-2021 00:00)
 App License: GPLv3
 App Author: jaredreich & zelon88
 App Description: A simple HRCloud2 document writer.
 App Integration: 0 (False)
-App Permission: 0 (Admin)
+App Permission: 1 (Everyone)
 HRCLOUD2-PLUGIN-END
 //*/
 
 // / The following code loads required HRCloud2 corefiles and resources.
 $noStyles = 1;
-if (!file_exists('/var/www/html/HRProprietary/HRCloud2/sanitizeCore.php')) {
+if (!file_exists('../../sanitizeCore.php')) {
   echo nl2br('</head><body>ERROR!!! HRC2PellApp33, Cannot process the HRCloud2 Sanitization Core file (sanitizeCore.php)!'."\n".'</body></html>'); 
   die (); }
 else {
-  require_once ('/var/www/html/HRProprietary/HRCloud2/sanitizeCore.php'); }
-if (!file_exists('/var/www/html/HRProprietary/HRCloud2/securityCore.php')) {
+  require_once ('../../sanitizeCore.php'); }
+if (!file_exists('../../securityCore.php')) {
   echo nl2br('ERROR!!! HRC2PellApp47, Cannot process the HRCloud2 Security Core file (securityCore.php).'."\n"); 
   die (); }
 else {
-  require ('/var/www/html/HRProprietary/HRCloud2/securityCore.php'); }
-if (!file_exists('/var/www/html/HRProprietary/HRCloud2/commonCore.php')) {
+  require ('../../securityCore.php'); }
+if (!file_exists('../../commonCore.php')) {
   echo nl2br('ERROR!!! HRC2PellApp35, Cannot process the HRCloud2 Common Core file (commonCore.php).'."\n"); 
   die (); }
 else {
-  require_once ('/var/www/html/HRProprietary/HRCloud2/commonCore.php'); }
-if (!file_exists('/var/www/html/HRProprietary/HRCloud2/Applications/Pell/dist/PellHRC2Lib.php')) {
+  require_once ('../../commonCore.php'); }
+if (!file_exists('../../Applications/Pell/dist/PellHRC2Lib.php')) {
   echo nl2br('ERROR!!! HRC2PellApp35, Cannot process the HRC2 library for Pell file (PellHRC2Lib.php).'."\n"); 
   die (); }
 else {
-  require ('/var/www/html/HRProprietary/HRCloud2/Applications/Pell/dist/PellHRC2Lib.php'); }
-
+  require ('../../Applications/Pell/dist/PellHRC2Lib.php'); }
 ?>
 <!DOCTYPE html>
 <html>
@@ -64,7 +63,7 @@ else {
   <img src="resources/save.png" title="Save File" alt="Save File" onclick="toggle_visibility('saveOptions');">
   <img src="resources/load.png" title="Open File" alt="Open File" onclick="toggle_visibility('openOptions');">
 </div>
-    <div align="center"><h3><?php if ($_GET['saved'] ==1) echo 'Saved '; echo ($fileEcho1); ?></h3></div>
+    <div align="center"><h3><?php if (isset($_GET['saved'])) if ($_GET['saved'] == 1) echo 'Saved '; echo ($fileEcho1); ?></h3></div>
 <img id="loading" name="loading" src="resources/loading.gif" style="display:none;">
 <br>
 <div id="saveOptions" name="saveOptions" align="center" style="display:none;">
