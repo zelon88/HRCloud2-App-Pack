@@ -1,14 +1,17 @@
 <?php
 /*//
 HRCLOUD2-PLUGIN-START
-App Name: aServStat
-App Version: 1.1 (4-29-2017 11:30)
+App Name: ServStat
+App Version: 1.3 (4-13-2021 22:00)
 App License: GPLv3
 App Author: avignat & zelon88
 App Description: A simple HRCloud2 App for keeping tabs on servers. 
 App Integration: 0 (False)
+App Permission: 0 (Admin)
 HRCLOUD2-PLUGIN-END
 //*/
+$noStyles = 1;
+
 	if(isset($_POST['name']) && isset($_POST['host'])) {
 		$port = 80;
 
