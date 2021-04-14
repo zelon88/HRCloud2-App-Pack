@@ -18,14 +18,20 @@ if (isset($_GET['rawOutput'])) {
 
 // / -----------------------------------------------------------------------------------
 // / The following code sanitizes all POST (and get) inputs used by Pell for HRCloud2.
-$_POST['deleteFile'] = str_replace(str_split('~#[](){};:$!#^&%@>*<"\\\''), '', $_POST['deleteFile']);
+if (isset($_POST['deleteFile'])) $_POST['deleteFile'] = str_replace(str_split('~#[](){};:$!#^&%@>*<"\\\''), '', $_POST['deleteFile']);
+else $_POST['deleteFile'] = '';
 $_POST['deleteFile'] = str_replace(' ', '_', $_POST['deleteFile']);
-$_POST['filename'] = str_replace(str_split('~#[](){};:$!#^&%@>*<"\\\''), '', $_POST['filename']);
+if (isset($_POST['filename'])) $_POST['filename'] = str_replace(str_split('~#[](){};:$!#^&%@>*<"\\\''), '', $_POST['filename']);
+else $_POST['filename'] = '';
 $_POST['filename'] = str_replace(' ', '_', $_POST['filename']);
-$_POST['pellOpen'] = str_replace(str_split('~#[](){};:$!#^&%@>*<"\\\''), '', $_POST['pellOpen']);
+if (isset($_POST['pellOpen'])) $_POST['pellOpen'] = str_replace(str_split('~#[](){};:$!#^&%@>*<"\\\''), '', $_POST['pellOpen']);
+else $_POST['pellOpen'] = '';
 $_POST['pellOpen'] = str_replace(' ', '_', $_POST['pellOpen']);
-$_POST['extension'] = str_replace(str_split('~#[](){};:$!#^&%@>*<"\\\''), '', $_POST['extension']);
-$_POST['htmlOutput'] = str_replace(str_split('"\\\''), '', $_POST['htmlOutput']);
+if (isset($_POST['extension'])) $_POST['extension'] = str_replace(str_split('~#[](){};:$!#^&%@>*<"\\\''), '', $_POST['extension']);
+else $_POST['extension'] = '';
+if (isset($_POST['htmlOutput'])) $_POST['htmlOutput'] = str_replace(str_split('~#[](){};:$!#^&%@>*<"\\\''), '', $_POST['htmlOutput']);
+else $_POST['htmlOutput'] = '';
+
 // / -----------------------------------------------------------------------------------
 
 // / -----------------------------------------------------------------------------------
@@ -61,6 +67,9 @@ $pellOpenFileExtension = pathinfo($pellOpenFile, PATHINFO_EXTENSION);
 $newTempHtmlPathname = str_replace('//', '/', $pellTempDir.'/'.$pellOpen.'.html');
 $newTempTxtPathname = str_replace('//', '/', $pellTempDir.'/'.$pellOpen.'.txt');
 $newHtmlPathname = str_replace($pellOpenFileExtension, 'html', $pellOpenFile);
+$fileEcho = '';
+if (!isset($fileEcho1)) $fileEcho1 = '';
+if (!isset($pellOpenFileData)) $pellOpenFileData = '';
 // / -----------------------------------------------------------------------------------
 
 // / -----------------------------------------------------------------------------------
@@ -125,13 +134,18 @@ if (!file_exists($pellTempDir.'/index.html')) {
   copy($InstLoc.'/index.html', $pellTempDir.'/index.html'); }
 if (isset($htmlOutput) && isset($filename) && $filename !== '' && isset($extension)) {
   file_put_contents($pellTempFile, $htmlOutput);
-  $txt = ('OP-Act: Created a temporary HTML file on '.$Time.'.');
-  $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL, FILE_APPEND); }
+  if (file_exists($pellTempFile)) {
+    $txt = ('OP-Act: Created a temporary HTML file on '.$Time.'.');
+    $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL, FILE_APPEND); }
+  if (!file_exists($pellTempFile)) {
+    $txt = ('ERROR!!! HRC2PellApp132, Could not create a temporary HTML file on '.$Time.'!');
+    $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL, FILE_APPEND); 
+    die($txt); } }
 // / -----------------------------------------------------------------------------------
 
 // / -----------------------------------------------------------------------------------
 // / The following code initializes the document conversion engine.
-if ((isset($_POST['pellOpen']) && $pellOpen == '') or (isset($_POST['filename']) && $filename !=='')) {
+if ((isset($_POST['pellOpen']) && $pellOpen !== '') or (isset($_POST['filename']) && $filename !== '')) {
   if (!file_exists('/usr/bin/unoconv')) {
     $txt = ('ERROR!!! HRC2654 Could not verify the document conversion engine on '.$Time.'.');
     $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL, FILE_APPEND); 
@@ -142,8 +156,8 @@ if ((isset($_POST['pellOpen']) && $pellOpen == '') or (isset($_POST['filename'])
     // / The following code checks to see if Unoconv is in memory.
     exec("pgrep soffice.bin", $DocEnginePID, $DocEngineStatus);
     if (count($DocEnginePID) == 0) {
-      exec('/usr/bin/unoconv -l &', $DocEnginePID1); 
-      $txt = ('OP-Act: Starting the document conversion engine (PID '.$DocEnginePID[0].') on '.$Time.'.');
+      exec('/usr/bin/unoconv -l &', $DocEnginePID); 
+      $txt = ('OP-Act: Starting the document conversion engine on '.$Time.'.');
       $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL, FILE_APPEND); 
       exec("pgrep soffice.bin", $DocEnginePID, $DocEngineStatus); } }
   if (count($DocEnginePID) > 0) {
@@ -174,11 +188,11 @@ if (isset($_POST['pellOpen']) && $pellOpen !== '') {
       $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL, FILE_APPEND); } 
     // / Code for opening .rtf files.
     if (in_array($pellOpenFileExtension, $pellDocs4)) {
-      if (!file_exists('/var/www/html/HRProprietary/HRCloud2/Applications/Pell/dist/rtf-html-php.php')) {
+      if (!file_exists('dist/rtf-html-php.php')) {
         echo nl2br('ERROR!!! HRC2PellApp114, Cannot process the rtf conversion engine file (rtf-html-php.php).'."\n"); 
         die (); }
       else {
-        require ('/var/www/html/HRProprietary/HRCloud2/Applications/Pell/dist/rtf-html-php.php'); }
+        require ('dist/rtf-html-php.php'); }
       $reader = new RtfReader();
       $rtfDATA = str_replace('<?', '', file_get_contents($pellOpenFile)); 
       $result = $reader->Parse($rtfDATA);
@@ -227,7 +241,7 @@ if (isset($_POST['pellOpen']) && $pellOpen !== '') {
 
 // / -----------------------------------------------------------------------------------
 // / The following code is performed when a file is saved.
-if (isset($_POST['filename']) && $filename !== '' && isset($_POST['extension']) && $extesion !== '') {
+if (isset($_POST['filename']) && $filename !== '' && isset($_POST['extension']) && $extension !== '') {
   if (file_exists($pellTempFile) && isset($filename) && isset($extension)) {
     if (in_array($extension, $pellDocs1)) {
       copy($pellTempFile, $newPathname); }
@@ -244,6 +258,10 @@ if (isset($_POST['filename']) && $filename !== '' && isset($_POST['extension']) 
         echo nl2br($txt."\n");
         unlink($pellTempFile);
         die($txt); } } }
+  if (!file_exists($newPathname)) {
+    $txt = ('ERROR!!! HRC2PellApp248, Could not create '.$newPathname.' on '.$Time.'!');
+    $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL, FILE_APPEND); 
+    echo nl2br($txt."\n"); }
   if (file_exists($newPathname)) {
     $txt = ('OP-Act, Created '.$newPathname.' on '.$Time.'.');
     $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL, FILE_APPEND); 
@@ -252,7 +270,7 @@ if (isset($_POST['filename']) && $filename !== '' && isset($_POST['extension']) 
 
 // / -----------------------------------------------------------------------------------
 // / The following code captures any errors generated during execution and logs them/returns them to the user.
-if (is_array($returnDATA)) {
+if (isset($returnData)) if(is_array($returnDATA)) {
   $txt = ('OP-Act, The conversion engine returned the following on '.$Time.':');
   $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL, FILE_APPEND);                
   foreach($returnDATA as $returnDATALINE) {
@@ -272,10 +290,27 @@ if (file_exists($pellTempFile)) {
   if (!file_exists($pellTempFile)) {
     $txt = ('OP-Act, Deleted temporary Pell data on '.$Time.'.');
     $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL, FILE_APPEND); } }
+if (file_exists($pellTempDir)) {
+  $DFiles = glob($pellTempDir.'/*');
+  foreach ($DFiles as $DFile) {
+    if (in_array($DFile, $defaultApps) or $DFile == ($pellTempDir.'/.') or $DFile == ($pellTempDir.'/..')) continue;
+    $stat = lstat($DFile);
+      if (($Now - $stat['mtime']) >= 600) { // Time to keep files.
+        if (is_file($DFile)) {
+          unlink($DFile); 
+          $txt = ('OP-Act: Cleaned '.$DFile.' on '.$Time.'.');
+          $MAKELogFile = file_put_contents($LogFile, $txt.PHP_EOL, FILE_APPEND); } 
+      if (is_dir($DFile)) {
+        $CleanDir = $DFile;
+        $CleanFiles = scandir($DFile);
+        $JanitorDeleteIndex = 1;
+        include($JanitorFile); 
+        @rmdir($DFile); } } } }
 // / -----------------------------------------------------------------------------------
 
 // / -----------------------------------------------------------------------------------
 // / The following code reloads the page as-needed so that recently saved files appear in the load files menu.
-if (isset($filename) && $filename !== '' && isset($extension) && $extesion !== '') {
+if (isset($filename) && $filename !== '' && isset($extension) && $extension !== '') {
+  // / Comment out this line (and move the bracket down one line) to disable auto-redirect for debugging.
   echo('<script>window.location.href = "'.$URL.'/HRProprietary/HRCloud2/Applications/Pell/Pell.php'.'";</script>'); }
 // / -----------------------------------------------------------------------------------
